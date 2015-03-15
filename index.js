@@ -1,13 +1,5 @@
-var express = require('express')
-var serveStatic = require('serve-static')
-
+var express = require('express');
+var serveStatic = require('serve-static');
 var app = express()
-
-app.use(serveStatic('public/'))
-app.listen(3000)
-
-// var express = require('express');
-// var serveStatic = require('serve-static');
-// var app = express();
-// app.use(serveStatic('public'));
-// app.listen(1337);
+  .use(serveStatic('public'))
+  .listen(1337);
