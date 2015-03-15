@@ -1,10 +1,13 @@
-var connect = require('connect');
-var http = require('http');
-var compression = require('compression');
-var oneDay = 86400000;
+var express = require('express')
+var serveStatic = require('serve-static')
 
-var app = connect()
-  .use(connect.static(__dirname + '/public', {
-    maxAge: oneDay
-  }))
-  .use(compression());
+var app = express()
+
+app.use(serveStatic('public/'))
+app.listen(3000)
+
+// var express = require('express');
+// var serveStatic = require('serve-static');
+// var app = express();
+// app.use(serveStatic('public'));
+// app.listen(1337);
