@@ -2,22 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Tracker Protype</title>
+  <title>Tracker Prototype</title>
 </head>
 <body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
   <script>
   (function () {
     'use strict';
 
+    window.setInterval(getLocation, 5000);
+
     function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(location) {
-              x.innerHtml = console.log(JSON.stringify(location, null, 2));
-            });
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
+      console.info('Attempting to get new location...');
+      if (navigator.geolocation) navigator.geolocation.getCurrentPosition(emitLocation, handleErrors, { enableHighAccuracy: true });
+    }
+
+    function emitLocation(location) {
+      console.info('Successfully retrieved clients GPS location.', location);
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:1338/',
+        data: { lat: location.coords.latitude, lng: location.coords.longitude },
+        success: function () { console.info('Successfully sent current location to socket API.'); }
+      });
+    }
+
+    function handleErrors(error) {
+      switch(error.code) {
+          case error.PERMISSION_DENIED:
+              console.error = "User denied the request for Geolocation.";
+              break;
+          case error.POSITION_UNAVAILABLE:
+              console.error = "Location information is unavailable.";
+              break;
+          case error.TIMEOUT:
+              console.error = "The request to get user location timed out.";
+              break;
+          case error.UNKNOWN_ERROR:
+              console.error = "An unknown error occurred.";
+              break;
+      }
     }
   })();
   </script>

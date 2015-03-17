@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  var socket = io('http://localhost:1338/');
 
   L.mapbox.accessToken = 'pk.eyJ1Ijoic2FtdWVsZGV2IiwiYSI6IjFRV3VPMEEifQ.xqZJCVD5H6955kQPYQ9ZEQ';
   var map = L.mapbox.map('map', 'samueldev.lf9kkbcm')
@@ -13,6 +12,8 @@
       'marker-symbol': 'bus'
     })
   });
+
+  var socket = io('http://localhost:1338/');
 
   socket.on('bus coord', function (location) {
     console.info('Received new bus coordinate from the API. Updating marker.', location);
