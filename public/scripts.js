@@ -7,7 +7,7 @@
   var map = L.mapbox.map('map', 'samueldev.lf9kkbcm')
     .setView([45.944921, -66.687651], 14);
 
-  var bus = L.marker([-73, 40], {
+  var bus = L.marker([-73.0, 40.0], {
     icon: L.mapbox.marker.icon({
       'marker-color': '#f86767',
       'marker-symbol': 'bus'
