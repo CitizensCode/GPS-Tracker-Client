@@ -14,7 +14,7 @@
     })
   });
 
-  var socket = io('http://localhost:1338/');
+  var socket = io(API_URL);
 
   socket.on('bus coord', function (location) {
     console.info('Received new bus coordinate from the API. Updating marker.', location);
