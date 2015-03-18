@@ -11,6 +11,8 @@
   (function () {
     'use strict';
 
+    var API_URL = window.location.host === 'citizenscode-gpstracker-client.herokuapp.com' ? 'http://citizenscode-gpstracker-api.herokuapp.com/' : 'http://localhost:1338/';
+
     window.setInterval(getLocation, 5000);
 
     function getLocation() {
@@ -22,7 +24,7 @@
       console.info('Successfully retrieved clients GPS location.', location);
       $.ajax({
         type: 'POST',
-        url: 'http://localhost:1338/',
+        url: API_URL,
         data: { lat: location.coords.latitude, lng: location.coords.longitude },
         success: function () { console.info('Successfully sent current location to socket API.'); }
       });
