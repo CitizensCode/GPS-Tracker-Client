@@ -16,7 +16,7 @@
     window.setInterval(getLocation, 5000);
 
     function getLocation() {
-      console.infow('Attempting to retrieve new location...');
+      console.info('Attempting to retrieve new location...');
       if (navigator.geolocation) navigator.geolocation.getCurrentPosition(emitLocation, handleErrors, { enableHighAccuracy: true });
     }
 
